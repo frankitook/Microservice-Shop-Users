@@ -18,10 +18,6 @@ app.use('/autenticacion', authRoutes);
 app.use('/usuarios', usuarioRoutes);
 
 
-if (!process.env.JWT_SECRET) {
-  const jwtSecret = crypto.randomBytes(32).toString('hex');
-  process.env.JWT_SECRET = jwtSecret;
-} 
 
 const iniciar = async () => {
   try {
