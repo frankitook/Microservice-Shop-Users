@@ -5,13 +5,14 @@ const app = express();
 const port = process.env.PORT;
 const base = require('./configuration/db');
 const crypto = require('crypto');
-
+const cors = require('cors');
 
 const usuarioRoutes = require('./routes/userRoutes');
 const authRoutes = require('./routes/authRoutes');
 
-
-app.use(express.json());
+app.use(cors());
+app.use(express.json({ limit: '5mb' }));  
+app.use(express.urlencoded({ limit: '5mb', extended: true }));
 
 
 app.use('/autenticacion', authRoutes);

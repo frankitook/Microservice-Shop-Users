@@ -84,37 +84,39 @@ const eliminarUsuario= async (req,res) => {
 
 
 const crearUsuario = async (req, res) => {
-    const { nroDni, tipoDni, nombre, apellido, direccion, telefono, email, contrasena, fechaNacimiento,foto, estado,tipo} = req.body;
-  
-    try {
-      
-      const clienteExistente = await Cliente.findOne({ where: { nroDni } });
-  
-      if (clienteExistente) {
-        return res.status(400).json({ message: 'El cliente ya existe' });
-      }
-  
-      
-      const nuevoCliente = await Cliente.create({
-        nroDni,
-        tipoDni,
-        nombre,
-        apellido,
-        direccion,
-        telefono,
-        email,
-        contrasena,
-        fechaNacimiento,
-        foto: foto || null,
-        estado,
-        tipo
-      });
-  
-      res.status(201).json({ message: 'Cliente creado correctamente', cliente: nuevoCliente });
-    } catch (error) {
-      res.status(500).json({ message: 'Error al crear el cliente', error: error.message });
+  const { nroDni, tipoDni, nombre, apellido, direccion, telefono, email, contrasena, fechaNacimiento, estado, tipo } = req.body;
+
+ 
+  const foto = req.file ? req.file.buffer : null; 
+
+  try {
+    const clienteExistente = await Cliente.findOne({ where: { nroDni } });
+
+    if (clienteExistente) {
+      return res.status(400).json({ message: 'El cliente ya existe' });
     }
-  };
+
+    
+    const nuevoCliente = await Cliente.create({
+      nroDni,
+      tipoDni,
+      nombre,
+      apellido,
+      direccion,
+      telefono,
+      email,
+      contrasena,
+      fechaNacimiento,
+      foto, 
+      estado,
+      tipo
+    });
+
+    res.status(201).json({ message: 'Cliente creado correctamente', cliente: nuevoCliente });
+  } catch (error) {
+    res.status(500).json({ message: 'Error al crear el cliente', error: error.message });
+  }
+};
   
 
   
