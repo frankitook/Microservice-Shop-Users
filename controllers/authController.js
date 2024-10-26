@@ -12,11 +12,19 @@ async function iniciarSesion(req, res) {
 
   try {
     const cliente = await Cliente.findOne({ where: { email, contrasena } });
+
     if (cliente) {
+      
+      if (cliente.estado === 'Suspendido') {
+        return res.status(403).json({ message: 'No se puede iniciar sesión. Su cuenta fue suspendida.' });
+      } else{
+
+      
       const token = generarTokenCliente(cliente);
       res.json({ token, nroDni: cliente.nroDni });
+    }
     } else {
-      res.status(401).send('Credenciales incorrectas');
+      res.status(401).json({ message: 'Credenciales incorrectas' });
     }
   } catch (err) {
     res.status(500).json({ message: err.message });

@@ -86,17 +86,20 @@ const eliminarUsuario= async (req,res) => {
 const crearUsuario = async (req, res) => {
   const { nroDni, tipoDni, nombre, apellido, direccion, telefono, email, contrasena, fechaNacimiento, estado, tipo } = req.body;
 
- 
-  const foto = req.file ? req.file.buffer : null; 
+  const foto = req.file ? req.file.buffer : null;
 
   try {
+    
+    if (req.file && req.file.size > 5 * 1024 * 1024) { 
+      return res.status(400).json({ message: 'La foto es muy grande, debe ser menor a 5 MB' });
+    }
+
     const clienteExistente = await Cliente.findOne({ where: { nroDni } });
 
     if (clienteExistente) {
       return res.status(400).json({ message: 'El cliente ya existe' });
     }
 
-    
     const nuevoCliente = await Cliente.create({
       nroDni,
       tipoDni,
@@ -107,14 +110,14 @@ const crearUsuario = async (req, res) => {
       email,
       contrasena,
       fechaNacimiento,
-      foto, 
+      foto,
       estado,
       tipo
     });
 
-    res.status(201).json({ message: 'Cliente creado correctamente', cliente: nuevoCliente });
+    res.status(201).json({ message: 'Cliente creado correctamente.', cliente: nuevoCliente });
   } catch (error) {
-    res.status(500).json({ message: 'Error al crear el cliente', error: error.message });
+    res.status(500).json({ message: 'Error al crear el cliente.', error: error.message });
   }
 };
   

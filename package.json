@@ -5,7 +5,7 @@
   "main": "user.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node microserviceuser.js"
+    "start": "nodemon microserviceuser.js"
   },
   "keywords": [],
   "author": "",
@@ -21,6 +21,7 @@
     "microservice-userservice": "file:",
     "multer": "^1.4.5-lts.1",
     "mysql2": "^3.11.3",
+    "nodemon": "^3.1.7",
     "sequelize": "^6.37.4"
   }
 }
