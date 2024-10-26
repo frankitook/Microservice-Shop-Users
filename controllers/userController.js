@@ -1,4 +1,6 @@
 const Cliente = require('../models/user');
+const bcrypt = require('bcrypt');
+const SALT_ROUNDS = 10;
 
 const obtenerUsuarios= async (req,res) => {
     
@@ -60,6 +62,8 @@ const actualizarUsuario= async(req,res) =>{
 
 }
 
+
+
 const eliminarUsuario= async (req,res) => {
     const { nroDni } = req.params;
     
@@ -83,13 +87,12 @@ const eliminarUsuario= async (req,res) => {
 
 
 
-const crearUsuario = async (req, res) => {
+const crearUsuario = async (req, res) => { 
   const { nroDni, tipoDni, nombre, apellido, direccion, telefono, email, contrasena, fechaNacimiento, estado, tipo } = req.body;
 
   const foto = req.file ? req.file.buffer : null;
 
   try {
-    
     if (req.file && req.file.size > 5 * 1024 * 1024) { 
       return res.status(400).json({ message: 'La foto es muy grande, debe ser menor a 5 MB' });
     }
@@ -100,6 +103,9 @@ const crearUsuario = async (req, res) => {
       return res.status(400).json({ message: 'El cliente ya existe' });
     }
 
+    
+    const hashedPassword = await bcrypt.hash(contrasena, SALT_ROUNDS);
+
     const nuevoCliente = await Cliente.create({
       nroDni,
       tipoDni,
@@ -108,7 +114,7 @@ const crearUsuario = async (req, res) => {
       direccion,
       telefono,
       email,
-      contrasena,
+      contrasena: hashedPassword,  
       fechaNacimiento,
       foto,
       estado,
@@ -120,6 +126,7 @@ const crearUsuario = async (req, res) => {
     res.status(500).json({ message: 'Error al crear el cliente.', error: error.message });
   }
 };
+
   
 
   
