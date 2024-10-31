@@ -7,6 +7,7 @@ const Persona = base.define('Persona', {
     nombre: { type: DataTypes.STRING, allowNull: false },
     apellido: { type: DataTypes.STRING, allowNull: false },
     direccion: { type: DataTypes.STRING, allowNull: false },
+    codigoPostal: { type: DataTypes.STRING, allowNull: false },
     telefono: { type: DataTypes.STRING, allowNull: false },
     email: { type: DataTypes.STRING, allowNull: false },
     contrasena: { type: DataTypes.STRING, allowNull: false },
