@@ -62,7 +62,7 @@ const eliminarUsuario = async (req, res) => {
 };
 
 const crearUsuario = async (req, res) => { 
-    const { nroDni, tipoDni, nombre, apellido, direccion, telefono, email, contrasena, fechaNacimiento, estado, tipo, codigoPostal } = req.body; // Asegúrate de incluir codigoPostal
+    const { nroDni, tipoDni, nombre, apellido, direccion, telefono, email, contrasena, fechaNacimiento, estado, tipo, codigoPostal } = req.body; 
 
     const foto = req.file ? req.file.buffer : null;
 
