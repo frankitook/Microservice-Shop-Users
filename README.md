@@ -1,6 +1,10 @@
-# Microservice User
+# Microservice E-commerce User
 
-This project is a microservice for user management that is part of a microservices architecture. The service handles user registration, authentication, and management, and is developed with Node.js for the backend.
+This project is a user management microservice designed for an e-commerce store, developed as part of a scalable microservices architecture. Built with Node.js and Express, this service provides essential functionalities such as user registration, authentication with JWT (JSON Web Token), and user profile management. It supports secure API endpoints for creating, updating, and managing user data, following RESTful principles.
+
+With a focus on security, efficiency, and scalability, this microservice integrates seamlessly with other e-commerce services such as product catalog, order management, and payment processing.
+
+Ideal for developers building online stores, this repository can be customized or expanded to support additional features like role-based access control, OAuth integration, and email verification.
 
 ## Server
 http://localhost:3000/
