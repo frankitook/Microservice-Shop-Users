@@ -12,8 +12,8 @@ POST http://localhost:3000/usuarios
 PUT http://localhost:3000/usuarios/:nroDni (Require a token)
 
 ### Get User
-GET http://localhost:3000/usuarios (Require a token)
-GET http://localhost:3000/usuarios/:nroDni (Require a token)
+- GET http://localhost:3000/usuarios (Require a token)
+- GET http://localhost:3000/usuarios/:nroDni (Require a token)
 
 ### Delete User
 DELETE http://localhost:3000/usuarios/:nroDni (Require a token)
