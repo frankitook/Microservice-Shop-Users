@@ -40,6 +40,3 @@ POST http://localhost:3000/autenticacion/login
 To start the project:
 ```bash
 npm start
-
-
-
